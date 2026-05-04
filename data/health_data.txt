@@ -1,0 +1,20 @@
+High blood pressure detected with abnormal readings during routine checkup.
+Elevated blood sugar levels indicating possible diabetes condition.
+Patient experiencing chest pain and discomfort suggesting heart-related issue.
+Mild fever and persistent cough observed indicating possible viral infection.
+Shortness of breath reported during normal activities.
+Unusual weight gain detected indicating possible obesity risk.
+Low hemoglobin levels found suggesting anemia condition.
+Frequent urination and excessive thirst indicating diabetic symptoms.
+Severe headache and blurred vision reported by patient.
+High cholesterol levels detected increasing risk of heart disease.
+Patient reports fatigue and weakness without clear cause.
+Irregular heartbeat detected during medical examination.
+Persistent stomach pain indicating possible digestive disorder.
+Joint pain and stiffness observed suggesting arthritis.
+Skin allergy and rashes reported after food intake.
+High fever with body pain indicating possible infection.
+Sleep disturbances and stress symptoms observed.
+Sudden weight loss without diet changes detected.
+Breathing difficulty during night time reported.
+Normal health condition observed with no major issues.

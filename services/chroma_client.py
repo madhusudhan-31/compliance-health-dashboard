@@ -1,34 +1,42 @@
-import chromadb
-from sentence_transformers import SentenceTransformer
+import os
 
 
-class ChromaService:
+class ChromaClient:
     def __init__(self):
-        self.client = chromadb.PersistentClient(path="./data/chroma_db")
+        self.data = []
+        print("✅ Simple DB initialized (no Chroma)")
 
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+    def load_if_empty(self):
+        if self.data:
+            return
 
-        self.collection = self.client.get_or_create_collection(
-            name="compliance_knowledge"
-        )
+        try:
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            file_path = os.path.join(base_dir, "..", "data", "health_data.txt")
 
-    def add_documents(self, docs):
-        embeddings = self.model.encode(docs).tolist()
+            with open(file_path, "r") as f:
+                lines = f.readlines()
 
-        ids = [f"id_{i}" for i in range(len(docs))]
+            self.data = [line.strip() for line in lines if line.strip()]
 
-        self.collection.add(
-            ids=ids,
-            documents=docs,
-            embeddings=embeddings
-        )
+            print(f"✅ Loaded {len(self.data)} records")
 
-    def query(self, text, n=3):
-        query_embedding = self.model.encode([text]).tolist()
+        except Exception as e:
+            print("❌ Load error:", e)
 
-        results = self.collection.query(
-            query_embeddings=query_embedding,
-            n_results=n
-        )
+    def query(self, query_text):
+        self.load_if_empty()
 
-        return results
+        query_text = query_text.lower()
+
+        # 🔍 simple keyword match
+        results = [
+            line for line in self.data
+            if query_text in line.lower()
+        ]
+
+        return results[:3]  # top 3
+
+
+# global instance
+chroma = ChromaClient()

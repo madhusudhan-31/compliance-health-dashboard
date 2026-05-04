@@ -1,51 +1,87 @@
 from flask import Blueprint, request, jsonify
-from services.groq_client import GroqClient
+import time
+
+from services.shared import groq_client as client
 
 categorise_bp = Blueprint("categorise", __name__)
 
-groq = GroqClient()
-
-CATEGORIES = [
-    "Security",
-    "Compliance",
-    "Performance",
-    "Risk",
-    "Operations"
-]
 
 @categorise_bp.route("/categorise", methods=["POST"])
 def categorise():
-    data = request.get_json()
+    """
+    Health Categorisation API
+    ---
+    tags:
+      - Health Categorise
 
-    if not data or "text" not in data:
-        return jsonify({"error": "Missing 'text' field"}), 400
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          properties:
+            text:
+              type: string
+              example: Patient has chest pain and shortness of breath
 
-    text = data["text"]
+    responses:
+      200:
+        description: Success
+    """
 
-    prompt = f"""
-You are an expert compliance analyst.
+    try:
+        data = request.get_json(silent=True)
 
-Classify the following text into ONE of these categories:
-{", ".join(CATEGORIES)}
+        if not data or "text" not in data:
+            return jsonify({"error": "text required"}), 400
 
-Return JSON only:
-{{
-  "category": "...",
-  "confidence": 0.0 to 1.0,
-  "reasoning": "..."
-}}
+        text = data["text"]
+
+        start = time.time()
+
+        # =========================
+        # AI PROMPT
+        # =========================
+        prompt = f"""
+You are a healthcare classifier.
+
+Classify the following patient symptom into ONE category only:
+
+Categories:
+- Cardiac
+- Respiratory
+- Neurological
+- Infection
+- General
 
 Text:
 {text}
+
+Return ONLY one word category.
 """
 
-    try:
-        response = groq.generate(prompt)
+        # =========================
+        # AI CALL
+        # =========================
+        ai_response = client.generate(prompt)
 
-        return jsonify(response)
+        category = ai_response.strip().split("\n")[0]
+
+        end = time.time()
+
+        return jsonify({
+            "category": category,
+            "meta": {
+                "response_time_ms": int((end - start) * 1000),
+                "model_used": getattr(client, "model", "unknown")
+            }
+        }), 200
 
     except Exception as e:
+        print("❌ Categorise error:", e)
+
         return jsonify({
-            "error": "AI processing failed",
-            "details": str(e)
+            "error": "Internal server error",
+            "message": str(e)
         }), 500

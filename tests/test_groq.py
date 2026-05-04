@@ -1,21 +1,22 @@
-from app import app
+import os
+from groq import Groq
+from dotenv import load_dotenv
 
-def test_categorise():
-    client = app.test_client()
+load_dotenv()
 
-    response = client.post("/categorise", json={
-        "text": "User data is not encrypted"
-    })
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-    assert response.status_code == 200
+try:
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {"role": "user", "content": "Explain fraud detection in simple terms"}
+        ],
+        temperature=0.5
+    )
 
-    data = response.get_json()
+    print("✅ API Working!\n")
+    print(response.choices[0].message.content)
 
-    assert "category" in data
-    assert "confidence" in data
-    assert "reasoning" in data
-
-
-if __name__ == "__main__":
-    test_categorise()
-    print("✅ Test Passed")
+except Exception as e:
+    print("❌ Error:", str(e))

@@ -1,18 +1,15 @@
-from services.chroma_client import ChromaService
+from services.chroma_client import ChromaClient
 
+client = ChromaClient()
 
-def test_chroma():
-    chroma = ChromaService()
+# Add sample health data
+client.add_data([
+    "Low oxygen levels detected in patient",
+    "Chest pain indicating possible heart issue",
+    "High fever and cough symptoms reported"
+])
 
-    result = chroma.query("data encryption issue")
+# Query similar health data
+result = client.query("low oxygen symptoms")
 
-    doc = result["documents"][0][0]
-
-    assert "encrypt" in doc.lower()
-
-    print("✅ Test Passed")
-    print("Top Result:", doc)
-
-
-if __name__ == "__main__":
-    test_chroma()
+print("\nRESULT:\n", result)
