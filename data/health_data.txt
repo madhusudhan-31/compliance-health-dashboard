@@ -1,0 +1,30 @@
+Patient reported persistent fever and cough for more than five days indicating possible infection.
+Sudden chest pain and shortness of breath observed suggesting possible cardiac issue.
+High blood sugar levels detected in routine checkup indicating diabetes risk.
+Patient experiencing severe headache and blurred vision indicating possible migraine.
+Abnormal liver enzyme levels found in blood test suggesting liver disorder.
+Low hemoglobin levels detected indicating anemia condition.
+Patient reported frequent urination and excessive thirst indicating diabetes symptoms.
+Sudden weight loss observed without reason indicating possible metabolic disorder.
+High blood pressure recorded consistently indicating hypertension.
+Patient experiencing joint pain and stiffness indicating arthritis.
+Irregular heartbeat detected during ECG suggesting cardiac arrhythmia.
+Chronic fatigue and weakness reported indicating possible thyroid disorder.
+Severe abdominal pain reported indicating possible appendicitis.
+Persistent cough with blood indicating possible tuberculosis.
+Elevated cholesterol levels detected indicating cardiovascular risk.
+Patient experiencing dizziness and fainting episodes indicating neurological issue.
+Abnormal kidney function test results indicating kidney disease.
+Skin rashes and itching reported indicating allergic reaction.
+Patient experiencing breathing difficulty indicating asthma condition.
+Frequent headaches and nausea reported indicating possible neurological disorder.
+Sudden vision loss reported indicating eye-related disease.
+Patient reported swelling in legs indicating possible heart or kidney issue.
+Abnormal white blood cell count indicating infection.
+Persistent back pain reported indicating spinal problem.
+Patient experiencing insomnia and stress indicating mental health issue.
+High fever with chills indicating possible viral infection.
+Loss of appetite and nausea indicating digestive disorder.
+Patient reported chest tightness during exercise indicating heart issue.
+Frequent cold and cough indicating low immunity.
+Abnormal hormone levels detected indicating endocrine disorder.
